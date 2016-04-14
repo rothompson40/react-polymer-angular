@@ -28,7 +28,7 @@ describe('Directive: commentbox', function () {
       scope.$digest();
       httpBackend.flush();
       var isolatedScope = element.isolateScope();
-      expect(isolatedScope.data).toEqual( { author : 'Santiago', msg : 'Msg 1', id : 1 })
+      expect(isolatedScope.data).toEqual( { author : 'Santiago', msg : 'Msg 1', id : 1 });
     });
 
     it('should render a CommentList', function(){

@@ -18,13 +18,16 @@ angular.module('commentForm', [])
       link: function postLink(scope, element, attrs) {
         scope.comment = {};
         scope.submitComment = function(){
+            angular.extend(scope.comment, {'timeStamp':' 1 minute ago'}, {'timeLapse': 1});
           var comment = scope.comment;
           if (!comment.msg || !comment.author) {
             return;
           }
+
           scope.$emit('submitted', comment);
           scope.comment = {};
         }
-      }
+      },
+      controller: 'timeLapseController'
     };
   });

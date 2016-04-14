@@ -16,6 +16,22 @@
 			"required": true,
 			"id": "msg",
 			"order": 1
+		},
+		"timeStamp": {
+			"name": "timeStamp",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "timeStamp",
+			"order": 2
+		},
+		"timeLapse": {
+			"name": "timeLapse",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "timeLapse",
+			"order": 3
 		}
 	}
 }

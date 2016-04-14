@@ -34,7 +34,8 @@ angular.module('commentBox', ['commentList', 'commentForm'])
           scope.data.concat([comment]);
           $http.post(scope.url, comment)
             .success(function(data, status, headers, config){
-              console.log('success')
+              console.log('success');
+
             })
             .error(function(data, status, headers, config){
               console.log(status);
@@ -42,6 +43,7 @@ angular.module('commentBox', ['commentList', 'commentForm'])
         };
         loadCommentsFromServer();
         setInterval(loadCommentsFromServer, scope.pollInterval);
+
         scope.$on('submitted', handleCommentSubmit);
       }
   }});
