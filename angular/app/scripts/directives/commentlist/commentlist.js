@@ -7,7 +7,7 @@
  * # commentList
  */
 angular.module('commentList', ['comment'])
-  .directive('commentList', function ($interval) {
+  .directive('commentList', function () {
     return {
       template: '<div class="commentList" ng-controller="timeLapseController">' +
                   '<comment-model ng-repeat="comment in comments" author="{{comment.author}}">' +
@@ -20,18 +20,7 @@ angular.module('commentList', ['comment'])
         comments: '='
       },
       link: function postLink(scope, element, attrs) {
-          var timeLapse;
-          scope.$watch('data', function(){
-              $interval(function(){
-                 timeLapse = scope.comment.timeLapse;
-                 timeLapse++;
-                  if(timeLapse == 59){
-                      var min = 1;
-                          min++;
-                      comment.timeStamp = min + "minutes ago"
-                  }
-              }, 1000);
-          })
+        
       }
     };
   });

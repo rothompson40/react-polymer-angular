@@ -45,5 +45,6 @@ angular.module('commentBox', ['commentList', 'commentForm'])
         setInterval(loadCommentsFromServer, scope.pollInterval);
 
         scope.$on('submitted', handleCommentSubmit);
+          scope.$on('updated', handleCommentSubmit);
       }
   }});
