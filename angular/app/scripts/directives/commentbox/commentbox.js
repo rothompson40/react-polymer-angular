@@ -35,16 +35,21 @@ angular.module('commentBox', ['commentList', 'commentForm'])
           $http.post(scope.url, comment)
             .success(function(data, status, headers, config){
               console.log('success');
-
             })
             .error(function(data, status, headers, config){
               console.log(status);
             });
         };
+
+        var handleCommentUpdate = function(event, data){
+
+        };
         loadCommentsFromServer();
         setInterval(loadCommentsFromServer, scope.pollInterval);
 
         scope.$on('submitted', handleCommentSubmit);
-          scope.$on('updated', handleCommentSubmit);
+
+        // Need to deleted the timelapse object and add the update object
+          scope.$on('updated', handleCommentUpdate);
       }
   }});

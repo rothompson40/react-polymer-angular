@@ -9,7 +9,7 @@
 angular.module('commentList', ['comment'])
   .directive('commentList', function () {
     return {
-      template: '<div class="commentList" ng-controller="timeLapseController">' +
+      template: '<div class="commentList">' +
                   '<comment-model ng-repeat="comment in comments" author="{{comment.author}}">' +
                     '{{comment.msg}}' + '{{comment.timeStamp}}' +
                   '</comment-model>' +
@@ -20,7 +20,7 @@ angular.module('commentList', ['comment'])
         comments: '='
       },
       link: function postLink(scope, element, attrs) {
-        
+
       }
     };
   });

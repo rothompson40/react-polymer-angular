@@ -16,11 +16,11 @@ angular.module('commentForm', [])
                 '</form>',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-          var timeLapse;
+          var timeLapse = 1;
           var min;
           var hour;
           var days;
-          
+
         scope.comment = {};
         scope.submitComment = function(){
             angular.extend(scope.comment, {'timeStamp':' 1 minute ago'});
@@ -29,38 +29,39 @@ angular.module('commentForm', [])
             return;
           }
               $interval(function(){
-                 timeLapse = scope.comment.timeLapse;
                  timeLapse++;
                   if(timeLapse == 59){
                       timeLapse = 0;
                        min = 1;
                           min++;
-                      var updateMin = min +'minutes ago';
+                      var updateMin = min +' minutes ago';
             angular.extend(scope.comment, {'timeStamp': updateMin});
-                    
+                    scope.$emit('updated', comment);
+
                   }
                   if(min == 59){
                       min = '';
                       hour = 1;
                       hour++;
-                      var updateHour = hour + 'hours ago';
+                      var updateHour = hour + ' hours ago';
             angular.extend(scope.comment, {'timeStamp': updateHour});
+                    scope.$emit('updated', comment);
                   }
                    if(hour == 23){
                       min = '';
                       hour = '';
                       day = 1;
                       day++;
-                      var updateHour = day + 'days ago';
-            angular.extend(scope.comment, {'timeStamp': updateHour});
+                      var updateDay = day + ' days ago';
+            angular.extend(scope.comment, {'timeStamp': updateDay});
+                     scope.$emit('updated', comment);
                   }
-                  
+
+
               }, 1000);
           scope.$emit('submitted', comment);
-          scope.$emit('updateTime', comment);
           scope.comment = {};
         }
-      },
-      controller: 'timeLapseController'
+      }
     };
   });
