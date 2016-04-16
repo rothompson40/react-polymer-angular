@@ -16,51 +16,24 @@ angular.module('commentForm', [])
                 '</form>',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-          var timeLapse;
-          var min;
-          var hour;
-          var days;
+          var timeMessageLoaded = 1;
+          var counter = function(){
+                 timeMessageLoaded++;
+            }
+        setInterval(counter, 1000);
           
         scope.comment = {};
         scope.submitComment = function(){
-            angular.extend(scope.comment, {'timeStamp':' 1 minute ago'});
+            angular.extend(scope.comment, {'timeStamp':' 1 minute ago'},{'timeLapse': timeMessageLoaded});
           var comment = scope.comment;
           if (!comment.msg || !comment.author) {
             return;
           }
-              $interval(function(){
-                 timeLapse = scope.comment.timeLapse;
-                 timeLapse++;
-                  if(timeLapse == 59){
-                      timeLapse = 0;
-                       min = 1;
-                          min++;
-                      var updateMin = min +'minutes ago';
-            angular.extend(scope.comment, {'timeStamp': updateMin});
-                    
-                  }
-                  if(min == 59){
-                      min = '';
-                      hour = 1;
-                      hour++;
-                      var updateHour = hour + 'hours ago';
-            angular.extend(scope.comment, {'timeStamp': updateHour});
-                  }
-                   if(hour == 23){
-                      min = '';
-                      hour = '';
-                      day = 1;
-                      day++;
-                      var updateday = day + 'days ago';
-            angular.extend(scope.comment, {'timeStamp': updateday});
-                  }
-                  
-              }, 1000);
+           
           scope.$emit('submitted', comment);
-          scope.$emit('updateTime', comment);
           scope.comment = {};
         }
-      },
-      controller: 'timeLapseController'
+        
+      }
     };
   });
