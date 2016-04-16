@@ -9,7 +9,11 @@
 angular.module('commentList', ['comment'])
   .directive('commentList', function () {
     return {
+<<<<<<< HEAD
       template: '<div class="commentList" +
+=======
+      template: '<div class="commentList">' +
+>>>>>>> 78229f11350475c3bf945ed646dfe99f121d8cb7
                   '<comment-model ng-repeat="comment in comments" author="{{comment.author}}">' +
                     '{{comment.msg}}' + '{{comment.timeStamp}}' +
                   '</comment-model>' +
@@ -20,7 +24,7 @@ angular.module('commentList', ['comment'])
         comments: '='
       },
       link: function postLink(scope, element, attrs) {
-        
+
       }
     };
   });
