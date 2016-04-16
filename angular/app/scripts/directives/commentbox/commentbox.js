@@ -7,7 +7,7 @@
  * # commentBox
  */
 angular.module('commentBox', ['commentList', 'commentForm'])
-  .directive('commentBox', function ($http) {
+  .directive('commentBox', function ($http, $interval, timeCounter) {
     return {
       template: '<div class="commentBox">' +
                   '<h1>Comments</h1>' +
@@ -20,7 +20,6 @@ angular.module('commentBox', ['commentList', 'commentForm'])
         pollInterval: '@'
       },
       link: function postLink(scope, element, attrs) {
-          var timeMessageNumber = 1;
           var incrementMinutes = 1;
           var incrementHours = 1;
           var incrementDays = 1;
@@ -32,17 +31,19 @@ angular.module('commentBox', ['commentList', 'commentForm'])
             .success(function(data, status, headers, config){
               scope.data = data;
               if(var i; i < data.length; i++){
-                  if(data[i].timeLapse >= timeMessageNumber) {
+                  if(data[i].timeLapse >= timeCounter.globalSeconds) {
                       $http.delete(scope.url, data[i].timeStamp).then(function(){
-                           mins = incrementminute++
-                          $http.post(scope.url, data[i].timeStamp = mins + " minutes ago").
+                           mins = incrementMinutes++
+                          var update = data[i].timeStamp = mins + " minutes ago";
+                          var changeTimeCounter = data[i].timeLapse = '';
+                          $http.post(scope.url, {update, changeTimeCounter}).
                           success(function(data, status, headers, config){
                                  console.log('minutes increment');
 
                           })
                       })
                   }
-                  if(mins == 60){
+                  if(data[i].timeStamp >= 60 + "minutes ago"){
                       mins = 0;
                       $http.delete(scope.url, data[i].timeStamp).then(function(){
                            hours = incrementHours++
@@ -53,7 +54,7 @@ angular.module('commentBox', ['commentList', 'commentForm'])
                           })
                       })
                   }
-                  if(hours = 24){
+                  if(data[i].timeStamp >= 24 + "hours ago"){
                       hours = 0;
                       $http.delete(scope.url, data[i].timeStamp).then(function(){
                            days = incrementDays++
@@ -82,13 +83,10 @@ angular.module('commentBox', ['commentList', 'commentForm'])
               console.log(status);
             });
         };
-            var counter = function(){
-                 timeMessageNumber++;
-            }
+            
             
         loadCommentsFromServer();
-        setInterval(loadCommentsFromServer, $scope.pollInterval);
-            setInterval(counter, 1000);
+        $interval(loadCommentsFromServer, $scope.pollInterval);
 
         scope.$on('submitted', handleCommentSubmit);
           
