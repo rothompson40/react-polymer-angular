@@ -51,8 +51,8 @@ angular.module('commentForm', [])
                       hour = '';
                       day = 1;
                       day++;
-                      var updateHour = day + 'days ago';
-            angular.extend(scope.comment, {'timeStamp': updateHour});
+                      var updateday = day + 'days ago';
+            angular.extend(scope.comment, {'timeStamp': updateday});
                   }
                   
               }, 1000);
