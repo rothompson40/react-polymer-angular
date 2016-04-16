@@ -43,7 +43,7 @@ angular.module('commentBox', ['commentList', 'commentForm'])
                           })
                       })
                   }
-                  if(data[i].timeStamp >= 60 + "minutes ago"){
+                  if(parseInt(data[i].timeStamp) >= 60){
                       mins = 0;
                       $http.delete(scope.url, data[i].timeStamp).then(function(){
                            hours = incrementHours++
@@ -54,7 +54,7 @@ angular.module('commentBox', ['commentList', 'commentForm'])
                           })
                       })
                   }
-                  if(data[i].timeStamp >= 24 + "hours ago"){
+                  if(parseInt(data[i].timeStamp) >= 24){
                       hours = 0;
                       $http.delete(scope.url, data[i].timeStamp).then(function(){
                            days = incrementDays++
