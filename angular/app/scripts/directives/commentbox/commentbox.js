@@ -76,33 +76,21 @@ angular.module('commentBox', ['commentList', 'commentForm'])
           $http.post(scope.url, comment)
             .success(function(data, status, headers, config){
               console.log('success');
+
             })
             .error(function(data, status, headers, config){
               console.log(status);
             });
         };
-<<<<<<< HEAD
             var counter = function(){
                  timeMessageNumber++;
             }
             
-=======
-
-        var handleCommentUpdate = function(event, data){
-
-        };
->>>>>>> 78229f11350475c3bf945ed646dfe99f121d8cb7
         loadCommentsFromServer();
         setInterval(loadCommentsFromServer, $scope.pollInterval);
             setInterval(counter, 1000);
 
         scope.$on('submitted', handleCommentSubmit);
-<<<<<<< HEAD
           
-=======
-
-        // Need to deleted the timelapse object and add the update object
-          scope.$on('updated', handleCommentUpdate);
->>>>>>> 78229f11350475c3bf945ed646dfe99f121d8cb7
       }
   });
