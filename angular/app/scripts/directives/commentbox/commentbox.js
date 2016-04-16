@@ -83,8 +83,7 @@ angular.module('commentBox', ['commentList', 'commentForm'])
               console.log(status);
             });
         };
-            
-            
+                        
         loadCommentsFromServer();
         $interval(loadCommentsFromServer, $scope.pollInterval);
 
