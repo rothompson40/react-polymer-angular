@@ -15,9 +15,9 @@ angular.module('commentForm', [])
                   '<input type="submit" value="Post" ng-click="submitComment()"/>' +
                 '</form>',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {    
-         timerCounter.globalCounter();
-           
+      link: function postLink(scope, element, attrs) {
+         timerCounter.countDown();
+
         scope.comment = {};
         scope.submitComment = function(){
             angular.extend(scope.comment, {'timeStamp':' 1 minute ago'},{'timeLapse': timerCounter.globalSeconds});
@@ -25,11 +25,11 @@ angular.module('commentForm', [])
           if (!comment.msg || !comment.author) {
             return;
           }
-           
+
           scope.$emit('submitted', comment);
           scope.comment = {};
         }
-        
+
       }
     };
   });
